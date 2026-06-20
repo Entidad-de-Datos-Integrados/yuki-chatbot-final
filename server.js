@@ -79,57 +79,57 @@ app.post("/api/chat", async (req, res) => {
       //return fs.createReadStream(filePath).pipe(res);
     }
 
-    console.log("🗣️ Solicitando voz a ElevenLabs...");
+    //console.log("🗣️ Solicitando voz a ElevenLabs...");
 
-    let audioBuffer = null;
-    let success = false;
+    //let audioBuffer = null;
+    //let success = false;
 
     // Intentar con cada API key hasta que funcione
-    for (const key of ELEVEN_API_KEYS) {
-      try {
-        const response = await fetch(
-          "https://api.elevenlabs.io/v1/text-to-speech/pNInz6obpgDQGcFmaJgB/stream", // voz predeterminada
-          {
-            method: "POST",
-            headers: {
-              "xi-api-key": key,
-              "Content-Type": "application/json",
+    //for (const key of ELEVEN_API_KEYS) {
+      //try {
+        //const response = await fetch(
+          //"https://api.elevenlabs.io/v1/text-to-speech/pNInz6obpgDQGcFmaJgB/stream", // voz predeterminada
+          //{
+            //method: "POST",
+            //headers: {
+              //"xi-api-key": key,
+              //"Content-Type": "application/json",
             },
-            body: JSON.stringify({
-              text,
-              voice_settings: {
-                stability: 0.5,
-                similarity_boost: 0.8,
+            //body: JSON.stringify({
+              //text,
+              //voice_settings: {
+                //stability: 0.5,
+                //similarity_boost: 0.8,
               },
             }),
           }
         );
 
-        if (!response.ok) {
-          const errorText = await response.text();
-          console.warn(`⚠️ Error con token: ${key.slice(0, 10)}...`);
-          console.warn(`→ Respuesta: ${errorText}`);
-          continue; // probar siguiente token
+        //if (!response.ok) {
+          //const errorText = await response.text();
+          //console.warn(`⚠️ Error con token: ${key.slice(0, 10)}...`);
+          //console.warn(`→ Respuesta: ${errorText}`);
+          //continue; // probar siguiente token
         }
 
-        audioBuffer = await response.arrayBuffer();
-        fs.writeFileSync(filePath, Buffer.from(audioBuffer)); // guardar en caché
-        console.log(`✅ Voz generada y guardada como: ${safeFileName}`);
-        success = true;
-        break;
-      } catch (err) {
-        console.warn("⚠️ Error con una API key, probando siguiente...", err);
+        //audioBuffer = await response.arrayBuffer();
+        //fs.writeFileSync(filePath, Buffer.from(audioBuffer)); // guardar en caché
+        //console.log(`✅ Voz generada y guardada como: ${safeFileName}`);
+        //success = true;
+        //break;
+      } //catch (err) {
+        //console.warn("⚠️ Error con una API key, probando siguiente...", err);
       }
     }
 
-    if (!success) throw new Error("Ninguna API key funcionó para generar voz.");
+    //if (!success) throw new Error("Ninguna API key funcionó para generar voz.");
 
-    res.set("Content-Type", "audio/mpeg");
-    res.send(Buffer.from(audioBuffer));
+    //res.set("Content-Type", "audio/mpeg");
+    //res.send(Buffer.from(audioBuffer));
 
-  } catch (error) {
-    console.error("❌ Error al generar la voz:", error);
-    res.status(500).send("Error generando voz con ElevenLabs");
+  } //catch (error) {
+    //console.error("❌ Error al generar la voz:", error);
+    //res.status(500).send("Error generando voz con ElevenLabs");
   }
 });
 
