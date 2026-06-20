@@ -62,21 +62,21 @@ app.post("/api/chat", async (req, res) => {
 });
 
 // ─── VOZ (ElevenLabs con cache y respaldo) ───────────────────────
-app.post("/api/voice", async (req, res) => {
-  const { text } = req.body;
-  if (!text) return res.status(400).send("Falta texto para sintetizar.");
+//app.post("/api/voice", async (req, res) => {
+  //const { text } = req.body;
+  //if (!text) return res.status(400).send("Falta texto para sintetizar.");
 
-  try {
+  //try {
     // Convertir texto a nombre de archivo seguro
-    const safeFileName =
-      text.toLowerCase().replace(/[^a-z0-9áéíóúüñ]+/gi, "_").slice(0, 60) + ".mp3";
-    const filePath = path.join(voicesDir, safeFileName);
+    //const safeFileName =
+      //text.toLowerCase().replace(/[^a-z0-9áéíóúüñ]+/gi, "_").slice(0, 60) + ".mp3";
+    //const filePath = path.join(voicesDir, safeFileName);
 
     // Si ya existe en caché, lo devolvemos directamente
-    if (fs.existsSync(filePath)) {
-      console.log(`🎧 Audio en caché encontrado: ${safeFileName}`);
-      res.set("Content-Type", "audio/mpeg");
-      return fs.createReadStream(filePath).pipe(res);
+    //if (fs.existsSync(filePath)) {
+      //console.log(`🎧 Audio en caché encontrado: ${safeFileName}`);
+      //res.set("Content-Type", "audio/mpeg");
+      //return fs.createReadStream(filePath).pipe(res);
     }
 
     console.log("🗣️ Solicitando voz a ElevenLabs...");
