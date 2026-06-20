@@ -14,17 +14,17 @@ app.use(express.static("public"));
 const OPENAI_KEY = process.env.OPENAI_API_KEY;
 
 // Puedes agregar varias claves de ElevenLabs (para respaldo)
-const ELEVEN_API_KEYS = [
-  process.env.ELEVEN_API_KEY_1,
-  process.env.ELEVEN_API_KEY_2,
-  process.env.ELEVEN_API_KEY_3,
-].filter(Boolean); // filtra las vacías
+//const ELEVEN_API_KEYS = [
+  //process.env.ELEVEN_API_KEY_1,
+  //process.env.ELEVEN_API_KEY_2,
+  //process.env.ELEVEN_API_KEY_3,
+]//.filter(Boolean); // filtra las vacías
 
 // Carpeta para guardar audios cacheados
-const voicesDir = path.join(process.cwd(), "voices");
-if (!fs.existsSync(voicesDir)) fs.mkdirSync(voicesDir);
+//const voicesDir = path.join(process.cwd(), "voices");
+//if (!fs.existsSync(voicesDir)) fs.mkdirSync(voicesDir);
 
-let chatHistory = [];
+//let chatHistory = [];
 
 // ─── CHAT ─────────────────────────────────────────────────────────
 app.post("/api/chat", async (req, res) => {
